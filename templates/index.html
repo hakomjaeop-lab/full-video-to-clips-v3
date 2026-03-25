@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صانع مقاطع الفيديو v3</title> 
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f9; color: #333; }
+        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: inline-block; max-width: 600px; width: 95%; }
+        h1 { color: #2c3e50; }
+        .upload-section { margin-bottom: 30px; padding: 20px; border: 2px dashed #3498db; border-radius: 8px; }
+        input[type="file"] { margin-bottom: 15px; }
+        button { background-color: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        button:hover { background-color: #2980b9; }
+        .delete-btn { background-color: #e74c3c; margin-top: 20px; }
+        .delete-btn:hover { background-color: #c0392b; }
+        .clips-list { text-align: right; margin-top: 30px; }
+        .clip-item { background: #ecf0f1; padding: 10px; margin-bottom: 8px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
+        .clip-link { color: #2980b9; text-decoration: none; font-weight: bold; }
+        .loading { display: none; color: #e67e22; font-weight: bold; margin-top: 15px; }
+    </style>
+    <script>
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('submit-btn').disabled = true;
+        }
+        
+        async function deleteAllClips() {
+            if (!confirm("هل أنت متأكد من حذف كافة المقاطع؟")) return;
+            
+            const response = await fetch('/delete_all', { method: 'POST' });
+            const result = await response.json();
+            if (result.status === 'success') {
+                alert(result.message);
+                window.location.reload();
+            } else {
+                alert("خطأ: " + result.message);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>صانع مقاطع الفيديو v3 🎬</h1>
+        <p>تقسيم الفيديو إلى مقاطع (30 ثانية) مع حذف الفيديو الأصلي تلقائياً</p>
+        
+        <div class="upload-section">
+            <form method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+                <input type="file" name="video" accept="video/*" required><br>
+                <button type="submit" id="submit-btn">رفع وتقسيم الفيديو</button>
+            </form>
+            <div id="loading" class="loading">جاري المعالجة... يرجى الانتظار</div>
+        </div>
+
+        {% if clips %}
+            <div class="clips-list">
+                <h2>المقاطع الناتجة:</h2>
+                {% for clip in clips %}
+                    <div class="clip-item">
+                        <span>{{ clip.name }}</span>
+                        <a href="{{ url_for('static', filename=clip.url) }}" class="clip-link" download>تحميل</a>
+                    </div>
+                {% endfor %}
+                
+                <button class="delete-btn" onclick="deleteAllClips()">🗑️ حذف كافة المقاطع</button>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
