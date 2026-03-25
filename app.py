@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 import os
 import subprocess
 import shutil
+import math
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -14,6 +15,15 @@ os.makedirs(CLIPS_FOLDER, exist_ok=True)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['CLIPS_FOLDER'] = CLIPS_FOLDER
+
+def get_video_duration(filepath):
+    """الحصول على طول الفيديو بالثواني باستخدام ffprobe"""
+    cmd = f'ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "{filepath}"'
+    try:
+        output = subprocess.check_output(cmd, shell=True).decode().strip()
+        return float(output)
+    except:
+        return 0
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -28,17 +38,34 @@ def index():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         
-        # تنظيف مجلد المقاطع القديم قبل البدء
+        # 1. الحصول على طول الفيديو
+        duration = get_video_duration(filepath)
+        if duration <= 0:
+            return "خطأ في قراءة طول الفيديو"
+        
+        # 2. حساب طول كل مقطع (لتقسيمه إلى 10 مقاطع)
+        clip_duration = duration / 10
+        
+        # 3. تنظيف مجلد المقاطع القديم
         if os.path.exists(app.config['CLIPS_FOLDER']):
             shutil.rmtree(app.config['CLIPS_FOLDER'])
         os.makedirs(app.config['CLIPS_FOLDER'], exist_ok=True)
         
-        # تقسيم الفيديو إلى clips صغيرة كل 30 ثانية
-        # استخدام -reset_timestamps 1 لضمان توافق التوقيت في المقاطع
-        cmd = f'ffmpeg -i "{filepath}" -c copy -map 0 -segment_time 30 -f segment -reset_timestamps 1 "{app.config["CLIPS_FOLDER"]}/clip%03d.mp4"'
-        subprocess.call(cmd, shell=True)
+        # 4. تقسيم الفيديو إلى 10 مقاطع بتنسيق TikTok (9:16)
+        # -vf "crop=ih*(9/16):ih,scale=1080:1920" يقوم بقص الفيديو من المنتصف وتغيير أبعاده
+        for i in range(10):
+            start_time = i * clip_duration
+            output_filename = f"clip_{i+1:02d}.mp4"
+            output_path = os.path.join(app.config['CLIPS_FOLDER'], output_filename)
+            
+            cmd = (
+                f'ffmpeg -ss {start_time} -t {clip_duration} -i "{filepath}" '
+                f'-vf "crop=ih*(9/16):ih,scale=1080:1920" '
+                f'-c:v libx264 -crf 23 -preset veryfast -c:a aac -b:a 128k "{output_path}" -y'
+            )
+            subprocess.call(cmd, shell=True)
         
-        # حذف الفيديو الأصلي فور الانتهاء من التقسيم (المطلب الأول)
+        # 5. حذف الفيديو الأصلي فور الانتهاء
         if os.path.exists(filepath):
             os.remove(filepath)
         
@@ -57,7 +84,6 @@ def index():
 
 @app.route("/delete_all", methods=["POST"])
 def delete_all():
-    """حذف كافة المقاطع (المطلب الثاني)"""
     try:
         if os.path.exists(app.config['CLIPS_FOLDER']):
             shutil.rmtree(app.config['CLIPS_FOLDER'])
