@@ -6,7 +6,9 @@ import math
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'static/uploads'
+# استخدام مسار مطلق لضمان الوصول للمجلدات في بيئة Render
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
 CLIPS_FOLDER = os.path.join(UPLOAD_FOLDER, "clips")
 
 # التأكد من وجود المجلدات
@@ -22,7 +24,8 @@ def get_video_duration(filepath):
     try:
         output = subprocess.check_output(cmd, shell=True).decode().strip()
         return float(output)
-    except:
+    except Exception as e:
+        print(f"Error getting duration: {e}")
         return 0
 
 @app.route("/", methods=["GET", "POST"])
@@ -41,7 +44,9 @@ def index():
         # 1. الحصول على طول الفيديو
         duration = get_video_duration(filepath)
         if duration <= 0:
-            return "خطأ في قراءة طول الفيديو"
+            if os.path.exists(filepath):
+                os.remove(filepath)
+            return "خطأ في قراءة طول الفيديو، تأكد من أن الملف فيديو صالح"
         
         # 2. حساب طول كل مقطع (لتقسيمه إلى 10 مقاطع)
         clip_duration = duration / 10
@@ -52,22 +57,25 @@ def index():
         os.makedirs(app.config['CLIPS_FOLDER'], exist_ok=True)
         
         # 4. تقسيم الفيديو إلى 10 مقاطع بتنسيق TikTok (9:16)
-        # -vf "crop=ih*(9/16):ih,scale=1080:1920" يقوم بقص الفيديو من المنتصف وتغيير أبعاده
-        for i in range(10):
-            start_time = i * clip_duration
-            output_filename = f"clip_{i+1:02d}.mp4"
-            output_path = os.path.join(app.config['CLIPS_FOLDER'], output_filename)
-            
-            cmd = (
-                f'ffmpeg -ss {start_time} -t {clip_duration} -i "{filepath}" '
-                f'-vf "crop=ih*(9/16):ih,scale=1080:1920" '
-                f'-c:v libx264 -crf 23 -preset veryfast -c:a aac -b:a 128k "{output_path}" -y'
-            )
-            subprocess.call(cmd, shell=True)
-        
-        # 5. حذف الفيديو الأصلي فور الانتهاء
-        if os.path.exists(filepath):
-            os.remove(filepath)
+        try:
+            for i in range(10):
+                start_time = i * clip_duration
+                output_filename = f"clip_{i+1:02d}.mp4"
+                output_path = os.path.join(app.config['CLIPS_FOLDER'], output_filename)
+                
+                # استخدام -y للإجبار على الكتابة فوق الملفات الموجودة
+                cmd = (
+                    f'ffmpeg -ss {start_time} -t {clip_duration} -i "{filepath}" '
+                    f'-vf "crop=ih*(9/16):ih,scale=1080:1920" '
+                    f'-c:v libx264 -crf 23 -preset veryfast -c:a aac -b:a 128k "{output_path}" -y'
+                )
+                subprocess.call(cmd, shell=True)
+        except Exception as e:
+            return f"خطأ أثناء معالجة المقاطع: {str(e)}"
+        finally:
+            # 5. حذف الفيديو الأصلي فور الانتهاء
+            if os.path.exists(filepath):
+                os.remove(filepath)
         
         clips = sorted(os.listdir(app.config['CLIPS_FOLDER']))
         clips_data = [{"name": c, "url": f"uploads/clips/{c}"} for c in clips if c.endswith('.mp4')]
@@ -93,5 +101,6 @@ def delete_all():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == "__main__":
+    # Render يمرر المنفذ عبر متغير البيئة PORT
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
