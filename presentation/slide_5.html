@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; }
+        .header { border-bottom: 1px solid #2D2D2D; padding-top: 40px; padding-left: 60px; padding-right: 60px; height: 120px; display: flex; align-items: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; }
+        .content { display: flex; flex-direction: column; flex: 1; padding-top: 40px; padding-left: 60px; padding-right: 60px; }
+        .flow-container { background-color: #2D2D2D; color: #E8ECEF; padding-top: 20px; padding-left: 30px; padding-right: 30px; border: 1px solid #0A0A0A; margin-bottom: 40px; text-align: center; }
+        .flow-text { font-family: 'Roboto Mono', monospace; font-size: 20px; line-height: 1.5; margin-bottom: 20px; }
+        .steps-container { display: flex; flex-direction: column; border: 1px solid #2D2D2D; background-color: #ffffff; }
+        .step-item { display: flex; border-bottom: 1px solid #2D2D2D; }
+        .step-item:last-child { border-bottom: none; }
+        .step-number { width: 80px; display: flex; justify-content: center; align-items: center; font-family: 'Roboto Mono', monospace; font-size: 28px; font-weight: 700; color: #ffffff; background-color: #4A90E2; border-right: 1px solid #2D2D2D; }
+        .step-content { flex: 1; padding-top: 20px; padding-left: 30px; padding-right: 30px; padding-bottom: 20px; font-size: 20px; display: flex; align-items: center; }
+        .highlight { font-family: 'Roboto Mono', monospace; color: #F5A623; font-weight: bold; background-color: #f4f4f4; padding: 2px 6px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Flux de traitement vidéo : 5 étapes automatisées</h1>
+        </div>
+        <div class="content">
+            <div class="flow-container">
+                <pre class="flow-text">[Upload] &rarr; [Lecture durée] &rarr; [Calcul segments] &rarr; [FFmpeg x10] &rarr; [Suppression original]</pre>
+            </div>
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">L'utilisateur uploade un fichier vidéo via le formulaire web</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content"><span class="highlight">ffprobe</span> mesure la durée totale de la vidéo (en secondes)</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">La durée est divisée par 10 pour calculer la longueur de chaque clip</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content"><span class="highlight">ffmpeg</span> génère 10 clips avec recadrage crop=ih*(9/16):ih et encodage H.264</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">La vidéo originale est supprimée automatiquement après traitement</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

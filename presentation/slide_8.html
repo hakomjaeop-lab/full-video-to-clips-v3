@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; }
+        .header { border-bottom: 1px solid #2D2D2D; padding-top: 40px; padding-left: 60px; padding-right: 60px; height: 120px; display: flex; align-items: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; }
+        .content { display: flex; flex: 1; }
+        .column { flex: 1; padding-top: 60px; padding-left: 60px; padding-right: 60px; border-right: 1px solid #2D2D2D; display: flex; flex-direction: column; }
+        .column:last-child { border-right: none; }
+        .subtitle { font-family: 'Roboto Mono', monospace; font-size: 24px; color: #4A90E2; margin-bottom: 30px; }
+        .code-block { background-color: #2D2D2D; color: #E8ECEF; padding-top: 30px; padding-left: 30px; padding-right: 30px; padding-bottom: 30px; font-family: 'Roboto Mono', monospace; font-size: 18px; line-height: 1.5; border: 1px solid #0A0A0A; overflow-x: auto; }
+        .code-comment { color: #F5A623; }
+        .code-keyword { color: #4A90E2; }
+        .list-item { display: flex; align-items: flex-start; margin-bottom: 30px; font-size: 20px; line-height: 1.5; }
+        .icon { font-size: 24px; color: #F5A623; margin-right: 20px; width: 30px; text-align: center; padding-top: 5px; }
+        .highlight { font-weight: bold; color: #4A90E2; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Déploiement sur Render : configuration Docker en 3 lignes</h1>
+        </div>
+        <div class="content">
+            <div class="column">
+                <h2 class="subtitle">render.yaml</h2>
+                <div class="code-block">
+<span class="code-keyword">services:</span>
+  - <span class="code-keyword">type:</span> web
+    <span class="code-keyword">name:</span> full-video-to-clips-v3
+    <span class="code-keyword">runtime:</span> docker
+    <span class="code-keyword">envVars:</span>
+      - <span class="code-keyword">key:</span> PORT
+        <span class="code-keyword">value:</span> 10000
+                </div>
+                <p style="margin-top: 20px; font-size: 18px; font-style: italic;">Le fichier render.yaml configure le déploiement automatique.</p>
+            </div>
+            <div class="column">
+                <h2 class="subtitle">Détails de l'infrastructure</h2>
+                <div class="list-item">
+                    <i class="fab fa-docker icon"></i>
+                    <div>
+                        <span class="highlight">Dockerfile optimisé</span><br>
+                        Installe Python 3.11, FFmpeg, et les dépendances Python via requirements.txt.
+                    </div>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-server icon"></i>
+                    <div>
+                        <span class="highlight">Gunicorn</span><br>
+                        Le serveur WSGI écoute sur le port 10000 (injecté par Render via la variable d'environnement $PORT).
+                    </div>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-box icon"></i>
+                    <div>
+                        <span class="highlight">Reproductibilité</span><br>
+                        Le déploiement est entièrement reproductible grâce à la conteneurisation, évitant les problèmes de dépendances liés à FFmpeg.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

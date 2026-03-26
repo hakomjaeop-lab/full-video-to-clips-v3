@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; }
+        .header { border-bottom: 1px solid #2D2D2D; padding-top: 40px; padding-left: 60px; padding-right: 60px; height: 120px; display: flex; align-items: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; }
+        .content { display: flex; flex-direction: column; flex: 1; padding-top: 40px; padding-left: 60px; padding-right: 60px; }
+        .intro-text { font-size: 24px; margin-bottom: 30px; }
+        .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .tech-item { border: 1px solid #2D2D2D; background-color: #ffffff; display: flex; align-items: center; padding-top: 20px; padding-left: 20px; padding-right: 20px; padding-bottom: 20px; }
+        .tech-item.full-width { grid-column: 1 / -1; }
+        .icon-container { width: 80px; height: 80px; border: 1px solid #2D2D2D; display: flex; justify-content: center; align-items: center; background-color: #E8ECEF; margin-right: 20px; flex-shrink: 0; }
+        .icon { font-size: 40px; color: #4A90E2; }
+        .tech-info { flex: 1; }
+        .tech-name { font-family: 'Roboto Mono', monospace; font-size: 24px; font-weight: 700; color: #0A0A0A; margin-bottom: 10px; }
+        .tech-desc { font-size: 18px; line-height: 1.4; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Architecture technique : Flask + FFmpeg + Docker</h1>
+        </div>
+        <div class="content">
+            <p class="intro-text">Le projet repose sur une stack légère et efficace :</p>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="icon-container">
+                        <i class="fab fa-python icon"></i>
+                    </div>
+                    <div class="tech-info">
+                        <div class="tech-name">Flask</div>
+                        <div class="tech-desc">Framework web Python pour gérer les routes HTTP et le rendu HTML.</div>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="icon-container">
+                        <i class="fas fa-film icon" style="color: #F5A623;"></i>
+                    </div>
+                    <div class="tech-info">
+                        <div class="tech-name">FFmpeg / ffprobe</div>
+                        <div class="tech-desc">Moteur de traitement vidéo (découpage, recadrage, encodage).</div>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="icon-container">
+                        <i class="fas fa-server icon"></i>
+                    </div>
+                    <div class="tech-info">
+                        <div class="tech-name">Gunicorn</div>
+                        <div class="tech-desc">Serveur WSGI de production pour exécuter l'application Flask.</div>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="icon-container">
+                        <i class="fab fa-docker icon" style="color: #F5A623;"></i>
+                    </div>
+                    <div class="tech-info">
+                        <div class="tech-name">Docker</div>
+                        <div class="tech-desc">Conteneurisation pour un environnement d'exécution reproductible.</div>
+                    </div>
+                </div>
+                <div class="tech-item full-width">
+                    <div class="icon-container">
+                        <i class="fas fa-cloud icon"></i>
+                    </div>
+                    <div class="tech-info">
+                        <div class="tech-name">Render</div>
+                        <div class="tech-desc">Plateforme cloud de déploiement via le fichier de configuration <code>render.yaml</code>.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+{
+  "project_info": {
+    "title": "Full Video to Clips v3",
+    "created": 1774494312.5530572,
+    "last_updated": 1774494473.619912,
+    "total_slides": 12
+  },
+  "slides": [
+    {
+      "id": "slide_1",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "slide_2",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "slide_3",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "slide_4",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "slide_5",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "slide_6",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "slide_7",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "slide_8",
+      "state": "edited",
+      "pageNum": 8
+    },
+    {
+      "id": "slide_9",
+      "state": "edited",
+      "pageNum": 9
+    },
+    {
+      "id": "slide_10",
+      "state": "edited",
+      "pageNum": 10
+    },
+    {
+      "id": "slide_11",
+      "state": "edited",
+      "pageNum": 11
+    },
+    {
+      "id": "slide_12",
+      "state": "edited",
+      "pageNum": 12
+    }
+  ],
+  "outline": [
+    {
+      "id": "slide_1",
+      "title": "Full Video to Clips v3",
+      "summary": "Titre de la présentation : Transformez n'importe quelle vidéo en 10 clips TikTok-ready en quelques secondes. Dépôt GitHub : hakomjaeop-lab/full-video-to-clips-v3. Déploiement : Render (Docker).",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_2",
+      "title": "Le problème résolu : découper une vidéo manuellement prend trop de temps",
+      "summary": "Créer du contenu court-format pour TikTok, Instagram Reels ou YouTube Shorts à partir d'une longue vidéo est une tâche répétitive et chronophage. Full Video to Clips v3 automatise entièrement ce processus.",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_3",
+      "title": "Ce que fait l'application en une phrase",
+      "summary": "L'application reçoit une vidéo, la divise automatiquement en 10 clips égaux au format TikTok 9:16 (720×1280), puis supprime la vidéo originale. Tableau des fonctionnalités clés.",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_4",
+      "title": "Architecture technique : Flask + FFmpeg + Docker",
+      "summary": "Le projet repose sur une stack légère et efficace : Flask (web), FFmpeg (traitement vidéo), Gunicorn (serveur), Docker (conteneurisation), Render (déploiement).",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_5",
+      "title": "Flux de traitement vidéo : 5 étapes automatisées",
+      "summary": "Upload -> Lecture durée (ffprobe) -> Calcul segments -> FFmpeg x10 -> Suppression original. Explication des 5 étapes du processus automatisé.",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_6",
+      "title": "La commande FFmpeg au cœur du moteur de découpe",
+      "summary": "La commande FFmpeg utilisée garantit qualité et rapidité : preset ultrafast, crf 28, crop=ih*(9/16):ih. Explication des paramètres.",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_7",
+      "title": "Interface utilisateur : simple, en arabe, orientée RTL",
+      "summary": "L'interface est entièrement en arabe avec support RTL natif : upload, chargement, liste des clips, bouton de suppression globale. Minimaliste et fonctionnelle.",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_8",
+      "title": "Déploiement sur Render : configuration Docker en 3 lignes",
+      "summary": "Le fichier render.yaml configure le déploiement automatique. Le Dockerfile installe Python 3.11, FFmpeg, et les dépendances. Gunicorn écoute sur le port 10000.",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_9",
+      "title": "Évolution du projet : 4 commits, 4 améliorations majeures",
+      "summary": "Historique des commits montrant l'évolution rapide vers une solution robuste : suppression auto, format 9:16, compatibilité Render, Dockerfile.",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_10",
+      "title": "Points forts et cas d'usage",
+      "summary": "Points forts : aucune configuration, traitement serveur, sécurité, logging. Cas d'usage : créateurs TikTok/Reels, agences marketing, automatisation.",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_11",
+      "title": "Améliorations possibles pour les prochaines versions",
+      "summary": "Tableau des améliorations futures : choix du nombre de clips, sélection du point de recadrage, barre de progression, stockage cloud, authentification.",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "slide_12",
+      "title": "Conclusion : un outil prêt pour la production",
+      "summary": "Full Video to Clips v3 est une application web fonctionnelle, déployée sur Render. Stack : Python, Flask, FFmpeg, Docker, Render. Citation finale.",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    }
+  ]
+}

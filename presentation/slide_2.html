@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; }
+        .header { border-bottom: 1px solid #2D2D2D; padding-top: 40px; padding-left: 60px; padding-right: 60px; height: 120px; display: flex; align-items: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; }
+        .content { display: flex; flex: 1; }
+        .column { flex: 1; padding-top: 60px; padding-left: 60px; padding-right: 60px; border-right: 1px solid #2D2D2D; display: flex; flex-direction: column; }
+        .column:last-child { border-right: none; }
+        .subtitle { font-family: 'Roboto Mono', monospace; font-size: 24px; color: #4A90E2; margin-bottom: 30px; }
+        .text { font-size: 20px; line-height: 1.6; margin-bottom: 30px; }
+        .list-item { display: flex; align-items: center; margin-bottom: 20px; font-size: 20px; }
+        .icon { font-size: 24px; color: #F5A623; margin-right: 20px; width: 30px; text-align: center; }
+        .solution-box { border: 1px solid #2D2D2D; padding-top: 30px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; margin-top: 20px; }
+        .solution-text { font-size: 22px; font-weight: bold; color: #4A90E2; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Le problème résolu : découper une vidéo manuellement prend trop de temps</h1>
+        </div>
+        <div class="content">
+            <div class="column">
+                <h2 class="subtitle">Le processus manuel chronophage</h2>
+                <p class="text">Créer du contenu court-format pour TikTok, Instagram Reels ou YouTube Shorts à partir d'une longue vidéo est une tâche répétitive. Les créateurs doivent :</p>
+                <div class="list-item">
+                    <i class="fas fa-file-import icon"></i>
+                    <span>Importer la vidéo dans un éditeur</span>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-cut icon"></i>
+                    <span>Découper manuellement chaque segment</span>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-crop-alt icon"></i>
+                    <span>Recadrer au format vertical 9:16</span>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-file-export icon"></i>
+                    <span>Exporter chaque clip individuellement</span>
+                </div>
+            </div>
+            <div class="column">
+                <h2 class="subtitle">La solution automatisée</h2>
+                <div class="solution-box">
+                    <i class="fas fa-magic icon" style="font-size: 40px; margin-bottom: 20px;"></i>
+                    <p class="solution-text"><strong>Full Video to Clips v3</strong> automatise entièrement ce processus en une seule opération via une interface web simple.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

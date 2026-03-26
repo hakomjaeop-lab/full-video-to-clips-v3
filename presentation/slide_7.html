@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; }
+        .header { border-bottom: 1px solid #2D2D2D; padding-top: 40px; padding-left: 60px; padding-right: 60px; height: 120px; display: flex; align-items: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; }
+        .content { display: flex; flex: 1; }
+        /* Reduced paddings to fit under 720px */
+        .column-left { flex: 1; padding-top: 30px; padding-left: 40px; padding-right: 40px; border-right: 1px solid #2D2D2D; display: flex; flex-direction: column; }
+        .column-right { flex: 1; padding-top: 30px; padding-left: 40px; padding-right: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #ffffff; }
+        .intro-text { font-size: 22px; line-height: 1.6; margin-bottom: 20px; }
+        .highlight { color: #4A90E2; font-weight: bold; }
+        .list-item { display: flex; align-items: flex-start; margin-bottom: 15px; font-size: 20px; line-height: 1.5; }
+        .icon { font-size: 24px; color: #F5A623; margin-right: 14px; width: 30px; text-align: center; padding-top: 5px; }
+        .conclusion-box { border-top: 1px solid #2D2D2D; padding-top: 10px; margin-top: auto; margin-bottom: 20px; font-size: 20px; font-style: italic; }
+        
+        /* Wireframe UI - compressed */
+        .wireframe-ui { width: 100%; border: 2px solid #2D2D2D; background-color: #E8ECEF; direction: rtl; font-family: 'Roboto', sans-serif; }
+        .wf-header { border-bottom: 2px solid #2D2D2D; padding-top: 12px; padding-bottom: 12px; text-align: center; background-color: #ffffff; }
+        .wf-title { font-size: 28px; font-weight: bold; color: #0A0A0A; }
+        .wf-body { padding-top: 12px; padding-left: 12px; padding-right: 12px; padding-bottom: 12px; }
+        .wf-upload-box { border: 2px dashed #2D2D2D; padding-top: 15px; padding-bottom: 15px; text-align: center; margin-bottom: 10px; background-color: #ffffff; }
+        .wf-upload-text { font-size: 20px; color: #2D2D2D; margin-bottom: 10px; }
+        .wf-button-primary { background-color: #4A90E2; color: #ffffff; border: 1px solid #2D2D2D; padding-top: 10px; padding-bottom: 10px; text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 15px; }
+        .wf-clips-header { font-size: 22px; font-weight: bold; margin-bottom: 8px; border-bottom: 1px solid #2D2D2D; padding-bottom: 6px; }
+        .wf-clip-item { border: 1px solid #2D2D2D; padding-top: 8px; padding-bottom: 8px; padding-left: 12px; padding-right: 12px; margin-bottom: 8px; background-color: #ffffff; display: flex; justify-content: space-between; }
+        .wf-button-danger { background-color: #F5A623; color: #ffffff; border: 1px solid #2D2D2D; padding-top: 8px; padding-bottom: 8px; text-align: center; font-size: 18px; font-weight: bold; margin-top: 12px; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Interface utilisateur : simple, en arabe, orientée RTL</h1>
+        </div>
+        <div class="content">
+            <div class="column-left">
+                <p class="intro-text">L'interface est entièrement en <span class="highlight">arabe</span> avec support RTL (Right-To-Left) natif :</p>
+                
+                <div class="list-item">
+                    <i class="fas fa-upload icon"></i>
+                    <span>Formulaire d'upload avec sélecteur de fichier vidéo</span>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-spinner icon"></i>
+                    <span>Bouton de soumission avec indicateur de chargement (<code>showLoading()</code>)</span>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-list icon"></i>
+                    <span>Affichage de la liste des clips générés avec liens de téléchargement</span>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-trash-alt icon"></i>
+                    <span>Bouton <strong>"حذف الكل"</strong> (Supprimer tout) pour nettoyer les clips via l'API <code>/delete_all</code></span>
+                </div>
+                
+                <div class="conclusion-box">
+                    L'interface est minimaliste et fonctionnelle, pensée pour une utilisation rapide sans configuration.
+                </div>
+            </div>
+            <div class="column-right">
+                <div class="wireframe-ui">
+                    <div class="wf-header">
+                        <div class="wf-title">صانع مقاطع الفيديو v3</div>
+                    </div>
+                    <div class="wf-body">
+                        <div class="wf-upload-box">
+                            <i class="fas fa-cloud-upload-alt" style="font-size: 40px; margin-bottom: 10px; color: #4A90E2;"></i>
+                            <div class="wf-upload-text">اختر ملف فيديو (MP4, MOV...)</div>
+                        </div>
+                        <div class="wf-button-primary">
+                            تقسيم الفيديو
+                        </div>
+                        
+                        <div class="wf-clips-header">المقاطع الجاهزة (10)</div>
+                        <div class="wf-clip-item">
+                            <span>clip_01.mp4</span>
+                            <i class="fas fa-download" style="color: #4A90E2;"></i>
+                        </div>
+                        <div class="wf-clip-item">
+                            <span>clip_02.mp4</span>
+                            <i class="fas fa-download" style="color: #4A90E2;"></i>
+                        </div>
+                        
+                        <div class="wf-button-danger">
+                            حذف الكل
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

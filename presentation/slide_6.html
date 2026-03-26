@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; }
+        .header { border-bottom: 1px solid #2D2D2D; padding-top: 40px; padding-left: 60px; padding-right: 60px; height: 120px; display: flex; align-items: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; }
+        /* Reduced top padding to bring content up */
+        .content { display: flex; flex-direction: column; flex: 1; padding-top: 24px; padding-left: 60px; padding-right: 60px; }
+        .intro-text { font-size: 22px; margin-bottom: 20px; }
+        /* Reduced vertical padding and bottom margin on code block */
+        .code-block { background-color: #2D2D2D; color: #E8ECEF; font-family: 'Roboto Mono', monospace; font-size: 20px; padding-top: 12px; padding-left: 30px; padding-right: 30px; padding-bottom: 12px; border: 1px solid #0A0A0A; margin-bottom: 20px; line-height: 1.5; white-space: pre-wrap; }
+        .highlight-code { color: #F5A623; font-weight: bold; }
+        .explanation-grid { display: flex; flex-direction: column; border: 1px solid #2D2D2D; background-color: #ffffff; }
+        .explanation-item { display: flex; border-bottom: 1px solid #2D2D2D; }
+        .explanation-item:last-child { border-bottom: none; }
+        /* Shrink inner paddings of the parameter cells */
+        .param-name { font-family: 'Roboto Mono', monospace; font-size: 20px; font-weight: 700; color: #4A90E2; width: 300px; padding-top: 12px; padding-left: 20px; padding-right: 20px; padding-bottom: 12px; border-right: 1px solid #2D2D2D; background-color: #E8ECEF; display: flex; align-items: center; }
+        .param-desc { font-size: 20px; padding-top: 12px; padding-left: 20px; padding-right: 20px; padding-bottom: 12px; flex: 1; display: flex; align-items: center; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">La commande FFmpeg au cœur du moteur de découpe</h1>
+        </div>
+        <div class="content">
+            <p class="intro-text">La commande FFmpeg utilisée garantit un équilibre optimal entre qualité visuelle et rapidité d'exécution :</p>
+            
+            <div class="code-block">ffmpeg -y -ss {start} -t {duration} \
+  -i {input} \
+  -vf "<span class="highlight-code">crop=ih*(9/16):ih,scale=720:1280</span>" \
+  -c:v libx264 <span class="highlight-code">-crf 28</span> <span class="highlight-code">-preset ultrafast</span> \
+  -c:a aac -b:a 64k \
+  {output_clip.mp4}</div>
+
+            <div class="explanation-grid">
+                <div class="explanation-item">
+                    <div class="param-name">-preset ultrafast</div>
+                    <div class="param-desc">Encodage extrêmement rapide pour économiser les ressources CPU sur la plateforme Render.</div>
+                </div>
+                <div class="explanation-item">
+                    <div class="param-name">-crf 28</div>
+                    <div class="param-desc">Constant Rate Factor : offre un excellent compromis entre la qualité visuelle et la taille finale du fichier.</div>
+                </div>
+                <div class="explanation-item">
+                    <div class="param-name">crop=ih*(9/16):ih</div>
+                    <div class="param-desc">Filtre vidéo qui effectue un recadrage centré dynamique pour obtenir le ratio vertical 9:16 parfait pour TikTok.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

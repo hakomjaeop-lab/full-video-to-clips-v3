@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; }
+        .header { border-bottom: 1px solid #2D2D2D; padding-top: 40px; padding-left: 60px; padding-right: 60px; height: 120px; display: flex; align-items: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; }
+        .content { display: flex; flex: 1; }
+        .column { flex: 1; display: flex; flex-direction: column; border-right: 1px solid #2D2D2D; }
+        .column:last-child { border-right: none; }
+        .column-header { font-family: 'Roboto Mono', monospace; font-size: 28px; font-weight: 700; color: #ffffff; background-color: #4A90E2; padding-top: 20px; padding-bottom: 20px; text-align: center; border-bottom: 1px solid #2D2D2D; }
+        .column:last-child .column-header { background-color: #F5A623; color: #0A0A0A; }
+        .column-body { padding-top: 40px; padding-left: 40px; padding-right: 40px; flex: 1; background-color: #ffffff; }
+        .list-item { display: flex; align-items: flex-start; margin-bottom: 30px; font-size: 20px; line-height: 1.5; }
+        .icon { font-size: 24px; margin-right: 20px; width: 30px; text-align: center; padding-top: 5px; }
+        .column:first-child .icon { color: #4A90E2; }
+        .column:last-child .icon { color: #F5A623; }
+        .item-title { font-weight: bold; color: #0A0A0A; margin-bottom: 5px; display: block; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Points forts et cas d'usage</h1>
+        </div>
+        <div class="content">
+            <div class="column">
+                <div class="column-header">Points forts</div>
+                <div class="column-body">
+                    <div class="list-item">
+                        <i class="fas fa-check-circle icon"></i>
+                        <div>
+                            <span class="item-title">Aucune configuration requise</span>
+                            L'utilisateur final n'a qu'à uploader sa vidéo, le système gère tout le reste automatiquement.
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <i class="fas fa-server icon"></i>
+                        <div>
+                            <span class="item-title">Traitement côté serveur</span>
+                            Pas de dépendance JavaScript lourde côté client, garantissant une compatibilité maximale.
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <i class="fas fa-shield-alt icon"></i>
+                        <div>
+                            <span class="item-title">Sécurité intégrée</span>
+                            Utilisation de <code>secure_filename</code> et de listes de commandes pour éviter les injections shell.
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <i class="fas fa-clipboard-list icon"></i>
+                        <div>
+                            <span class="item-title">Gestion des erreurs</span>
+                            Logging détaillé pour faciliter le débogage et la maintenance en production.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="column-header">Cas d'usage</div>
+                <div class="column-body">
+                    <div class="list-item">
+                        <i class="fab fa-tiktok icon"></i>
+                        <div>
+                            <span class="item-title">Créateurs de contenu</span>
+                            Idéal pour alimenter rapidement les chaînes TikTok, Instagram Reels ou YouTube Shorts à partir de vidéos longues.
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <i class="fas fa-bullhorn icon"></i>
+                        <div>
+                            <span class="item-title">Agences de marketing digital</span>
+                            Outil de productivité pour décliner une campagne vidéo en multiples formats courts pour les réseaux sociaux.
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <i class="fas fa-cogs icon"></i>
+                        <div>
+                            <span class="item-title">Automatisation de production</span>
+                            Intégration possible dans des pipelines de création de contenu vidéo à grande échelle.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

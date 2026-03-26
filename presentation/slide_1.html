@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid #2D2D2D; }
+        .grid-container { display: flex; flex-direction: column; width: 80%; border: 1px solid #2D2D2D; }
+        .header-section { border-bottom: 1px solid #2D2D2D; padding: 60px; text-align: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 64px; font-weight: 700; color: #0A0A0A; margin-bottom: 20px; }
+        .subtitle { font-family: 'Roboto', sans-serif; font-size: 32px; color: #4A90E2; margin-bottom: 10px; }
+        .arabic-subtitle { font-family: 'Roboto', sans-serif; font-size: 32px; color: #F5A623; direction: rtl; }
+        .body-section { padding: 40px; text-align: center; background-color: #E8ECEF; }
+        .description { font-size: 24px; margin-bottom: 30px; line-height: 1.5; }
+        .details-grid { display: flex; border-top: 1px solid #2D2D2D; }
+        .detail-item { flex: 1; padding: 20px; text-align: center; border-right: 1px solid #2D2D2D; }
+        .detail-item:last-child { border-right: none; }
+        .detail-label { font-family: 'Roboto Mono', monospace; font-size: 16px; color: #0A0A0A; margin-bottom: 10px; text-transform: uppercase; }
+        .detail-value { font-size: 20px; font-weight: bold; color: #4A90E2; }
+        .icon { font-size: 24px; margin-bottom: 10px; color: #2D2D2D; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="grid-container">
+            <div class="header-section">
+                <h1 class="title">Full Video to Clips v3</h1>
+                <h2 class="subtitle">Le découpeur vidéo automatisé</h2>
+                <h2 class="arabic-subtitle">صانع مقاطع الفيديو v3</h2>
+            </div>
+            <div class="body-section">
+                <p class="description">Transformez n'importe quelle vidéo en 10 clips TikTok-ready en quelques secondes.</p>
+            </div>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <i class="fab fa-github icon"></i>
+                    <div class="detail-label">Dépôt GitHub</div>
+                    <div class="detail-value">hakomjaeop-lab/full-video-to-clips-v3</div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-server icon"></i>
+                    <div class="detail-label">Déploiement</div>
+                    <div class="detail-value">Render (Docker)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,70 +1,103 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صانع مقاطع الفيديو v3</title> 
+    <title>صانع مقاطع الفيديو v4</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f9; color: #333; }
-        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: inline-block; max-width: 600px; width: 95%; }
-        h1 { color: #2c3e50; }
-        .upload-section { margin-bottom: 30px; padding: 20px; border: 2px dashed #3498db; border-radius: 8px; }
-        input[type="file"] { margin-bottom: 15px; }
-        button { background-color: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; transition: 0.3s; }
-        button:hover { background-color: #2980b9; }
-        .delete-btn { background-color: #e74c3c; margin-top: 20px; }
-        .delete-btn:hover { background-color: #c0392b; }
-        .clips-list { text-align: right; margin-top: 30px; }
-        .clip-item { background: #ecf0f1; padding: 10px; margin-bottom: 8px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
-        .clip-link { color: #2980b9; text-decoration: none; font-weight: bold; }
-        .loading { display: none; color: #e67e22; font-weight: bold; margin-top: 15px; }
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .card { border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top: 50px; }
+        .btn-primary { background-color: #4A90E2; border: none; }
+        .btn-danger { background-color: #F5A623; border: none; }
+        #loading-overlay { display: none; background: rgba(255,255,255,0.9); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; justify-content: center; align-items: center; flex-direction: column; }
     </style>
-    <script>
-        function showLoading() {
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('submit-btn').disabled = true;
-        }
-        
-        async function deleteAllClips() {
-            if (!confirm("هل أنت متأكد من حذف كافة المقاطع؟")) return;
-            
-            const response = await fetch('/delete_all', { method: 'POST' });
-            const result = await response.json();
-            if (result.status === 'success') {
-                alert(result.message);
-                window.location.reload();
-            } else {
-                alert("خطأ: " + result.message);
-            }
-        }
-    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>صانع مقاطع الفيديو v3 🎬</h1>
-        <p>تقسيم الفيديو إلى 10 مقاطع متساوية بتنسيق TikTok (9:16) مع حذف الفيديو الأصلي تلقائياً</p>
-        
-        <div class="upload-section">
-            <form method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
-                <input type="file" name="video" accept="video/*" required><br>
-                <button type="submit" id="submit-btn">رفع وتقسيم الفيديو</button>
-            </form>
-            <div id="loading" class="loading">جاري المعالجة... يرجى الانتظار</div>
+    <div id="loading-overlay">
+        <div class="spinner-border text-primary" role="status"></div>
+        <h4 id="status-message" class="mt-3">جاري المعالجة...</h4>
+        <div class="progress w-50 mt-2">
+            <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
         </div>
-
-        {% if clips %}
-            <div class="clips-list">
-                <h2>المقاطع الناتجة:</h2>
-                {% for clip in clips %}
-                    <div class="clip-item">
-                        <span>{{ clip.name }}</span>
-                        <a href="{{ url_for('static', filename=clip.url) }}" class="clip-link" download>تحميل</a>
-                    </div>
-                {% endfor %}
-                
-                <button class="delete-btn" onclick="deleteAllClips()">🗑️ حذف كافة المقاطع</button>
-            </div>
-        {% endif %}
     </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card p-4">
+                    <h1 class="text-center mb-4">صانع مقاطع الفيديو v4 🎬</h1>
+                    <p class="text-center text-muted">تقسيم الفيديو إلى 10 مقاطع TikTok (9:16) - يدعم روابط يوتيوب</p>
+                    
+                    <form id="upload-form" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label">رفع ملف فيديو من جهازك:</label>
+                            <input type="file" name="video" class="form-control" accept="video/*">
+                        </div>
+                        <div class="text-center my-3">أو</div>
+                        <div class="mb-3">
+                            <label class="form-label">لصق رابط فيديو من يوتيوب:</label>
+                            <input type="text" name="youtube_url" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2">بدء التقسيم</button>
+                    </form>
+
+                    <div id="clips-section" class="mt-5 {% if not clips %}d-none{% endif %}">
+                        <h3 class="mb-3">المقاطع الجاهزة:</h3>
+                        <div class="list-group">
+                            {% for clip in clips %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ clip.name }}
+                                <a href="{{ url_for('static', filename=clip.url) }}" class="btn btn-sm btn-outline-primary" download>تحميل</a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button onclick="deleteAllClips()" class="btn btn-danger w-100 mt-3">🗑️ حذف كافة المقاطع</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const overlay = document.getElementById('loading-overlay');
+        const statusMsg = document.getElementById('status-message');
+        const progressBar = document.getElementById('progress-bar');
+
+        function checkStatus() {
+            fetch('/status')
+                .then(r => r.json())
+                .then(data => {
+                    if (data.is_processing) {
+                        overlay.style.display = 'flex';
+                        statusMsg.innerText = data.message;
+                        let percent = (data.current_clip / data.total_clips) * 100;
+                        progressBar.style.width = percent + '%';
+                        setTimeout(checkStatus, 2000);
+                    } else if (overlay.style.display === 'flex') {
+                        location.reload();
+                    }
+                });
+        }
+
+        document.getElementById('upload-form').onsubmit = function() {
+            // Give some time for the request to reach server
+            setTimeout(checkStatus, 1000);
+        };
+
+        function deleteAllClips() {
+            if(confirm("هل أنت متأكد من حذف كافة المقاطع؟")) {
+                fetch('/delete_all', {method: 'POST'})
+                .then(r => r.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                });
+            }
+        }
+
+        // تفقد الحالة عند تحميل الصفحة (لضمان الاستمرارية عند التحديث)
+        checkStatus();
+    </script>
 </body>
 </html>

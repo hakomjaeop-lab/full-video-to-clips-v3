@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; }
+        .header { border-bottom: 1px solid #2D2D2D; padding-top: 40px; padding-left: 60px; padding-right: 60px; height: 120px; display: flex; align-items: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; }
+        .content { display: flex; flex-direction: column; flex: 1; padding-top: 60px; padding-left: 60px; padding-right: 60px; }
+        .summary-box { border: 1px solid #2D2D2D; padding-top: 30px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; margin-bottom: 40px; }
+        .summary-text { font-size: 24px; line-height: 1.6; margin-bottom: 30px; }
+        .highlight { color: #4A90E2; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; border: 2px solid #2D2D2D; background-color: #ffffff; }
+        th, td { border: 1px solid #2D2D2D; padding-top: 20px; padding-left: 20px; padding-right: 20px; text-align: left; font-size: 20px; }
+        th { font-family: 'Roboto Mono', monospace; background-color: #E8ECEF; color: #0A0A0A; font-weight: 700; border-bottom: 2px solid #2D2D2D; padding-bottom: 20px; }
+        td { padding-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Ce que fait l'application en une phrase</h1>
+        </div>
+        <div class="content">
+            <div class="summary-box">
+                <p class="summary-text">L'application reçoit une vidéo, la divise automatiquement en <span class="highlight">10 clips égaux</span> au format <span class="highlight">TikTok 9:16 (720×1280)</span>, puis supprime la vidéo originale pour économiser l'espace disque.</p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fonctionnalité</th>
+                        <th>Détail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nombre de clips</td>
+                        <td>10 clips égaux</td>
+                    </tr>
+                    <tr>
+                        <td>Format de sortie</td>
+                        <td>MP4, 720×1280 (9:16)</td>
+                    </tr>
+                    <tr>
+                        <td>Suppression auto</td>
+                        <td>Vidéo originale supprimée après traitement</td>
+                    </tr>
+                    <tr>
+                        <td>Interface</td>
+                        <td>Web (navigateur)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

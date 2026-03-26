@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; }
+        .header { border-bottom: 1px solid #2D2D2D; padding-top: 40px; padding-left: 60px; padding-right: 60px; height: 120px; display: flex; align-items: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; }
+        .content { display: flex; flex-direction: column; flex: 1; padding-top: 60px; padding-left: 60px; padding-right: 60px; align-items: center; }
+        table { width: 100%; border-collapse: collapse; border: 2px solid #2D2D2D; background-color: #ffffff; }
+        th, td { border: 1px solid #2D2D2D; padding-top: 20px; padding-left: 20px; padding-right: 20px; text-align: left; font-size: 20px; }
+        th { font-family: 'Roboto Mono', monospace; background-color: #E8ECEF; color: #0A0A0A; font-weight: 700; border-bottom: 2px solid #2D2D2D; padding-bottom: 20px; font-size: 24px; }
+        td { padding-bottom: 20px; }
+        .icon { color: #4A90E2; margin-right: 15px; width: 30px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Améliorations possibles pour les prochaines versions</h1>
+        </div>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Amélioration</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-sliders-h icon"></i>Choix du nombre de clips (pas seulement 10)</td>
+                        <td>Flexibilité accrue pour l'utilisateur</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-crop icon"></i>Sélection du point de recadrage (gauche/centre/droite)</td>
+                        <td>Meilleure qualité visuelle selon le contenu</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-tasks icon"></i>Barre de progression en temps réel (WebSocket)</td>
+                        <td>Meilleure expérience utilisateur (UX)</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-cloud-upload-alt icon"></i>Stockage cloud (S3 / Cloudinary)</td>
+                        <td>Persistance des clips et économie d'espace local</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-user-lock icon"></i>Authentification utilisateur</td>
+                        <td>Support multi-utilisateurs et historiques personnels</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #E8ECEF; color: #2D2D2D; }
+        .slide-container { width: 1280px; min-height: 720px; background-color: #E8ECEF; position: relative; display: flex; flex-direction: column; }
+        .header { border-bottom: 1px solid #2D2D2D; padding-top: 40px; padding-left: 60px; padding-right: 60px; height: 120px; display: flex; align-items: center; background-color: #ffffff; }
+        .title { font-family: 'Roboto Mono', monospace; font-size: 32px; font-weight: 700; color: #0A0A0A; }
+        .content { display: flex; flex-direction: column; flex: 1; padding-top: 60px; padding-left: 60px; padding-right: 60px; }
+        table { width: 100%; border-collapse: collapse; border: 2px solid #2D2D2D; background-color: #ffffff; margin-bottom: 40px; }
+        th, td { border: 1px solid #2D2D2D; padding-top: 20px; padding-left: 20px; padding-right: 20px; text-align: left; font-size: 20px; }
+        th { font-family: 'Roboto Mono', monospace; background-color: #E8ECEF; color: #0A0A0A; font-weight: 700; border-bottom: 2px solid #2D2D2D; padding-bottom: 20px; }
+        td { padding-bottom: 20px; line-height: 1.5; }
+        .commit-hash { font-family: 'Roboto Mono', monospace; color: #4A90E2; font-weight: bold; background-color: #f4f4f4; padding: 4px 8px; border: 1px solid #ccc; }
+        .conclusion-box { border: 1px solid #2D2D2D; padding-top: 20px; padding-left: 30px; padding-right: 30px; padding-bottom: 20px; background-color: #ffffff; font-size: 22px; font-weight: bold; color: #4A90E2; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">Évolution du projet : 4 commits, 4 améliorations majeures</h1>
+        </div>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Commit</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="commit-hash">823cf41</span></td>
+                        <td>Création initiale : suppression auto + bouton de suppression manuelle</td>
+                    </tr>
+                    <tr>
+                        <td><span class="commit-hash">444dcef</span></td>
+                        <td>Ajout du format TikTok 9:16 et découpage en 10 clips égaux</td>
+                    </tr>
+                    <tr>
+                        <td><span class="commit-hash">888f976</span></td>
+                        <td>Compatibilité Render + chemins absolus pour la stabilité</td>
+                    </tr>
+                    <tr>
+                        <td><span class="commit-hash">009fb94</span></td>
+                        <td>Ajout du Dockerfile + stabilisation du traitement FFmpeg</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="conclusion-box">
+                Le projet a évolué rapidement vers une solution robuste et déployable en production.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
