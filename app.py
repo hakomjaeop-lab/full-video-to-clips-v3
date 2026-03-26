@@ -100,11 +100,32 @@ def index():
         youtube_url = request.form.get("youtube_url")
         if youtube_url:
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], "yt_video.mp4")
+            cookie_file = os.path.join(app.config['UPLOAD_FOLDER'], "cookies.txt")
+            
             try:
                 processing_status["is_processing"] = True
                 processing_status["message"] = "جاري تحميل الفيديو من يوتيوب..."
-                cmd = ['yt-dlp', '-f', 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4', '-o', filepath, youtube_url]
-                subprocess.run(cmd, check=True)
+                
+                # تحسين اختيار الجودة
+                cmd = ['yt-dlp', '-f', 'best[ext=mp4]/best', '-o', filepath]
+                
+                # دعم الكوكيز من متغيرات البيئة (Secrets)
+                env_cookies = os.environ.get("YOUTUBE_COOKIES")
+                if env_cookies and env_cookies.strip():
+                    with open(cookie_file, "w") as f:
+                        f.write(env_cookies)
+                    cmd.extend(['--cookies', cookie_file])
+                
+                cmd.append(youtube_url)
+                
+                result = subprocess.run(cmd, capture_output=True, text=True)
+                
+                if os.path.exists(cookie_file):
+                    os.remove(cookie_file)
+                
+                if result.returncode != 0:
+                    raise Exception(result.stderr)
+                    
                 threading.Thread(target=process_video_async, args=(filepath,)).start()
                 return redirect(url_for('index'))
             except Exception as e:
@@ -142,5 +163,6 @@ def delete_all():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
+    # Replit Deployments يستخدم المنفذ 8080 افتراضياً
+    port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
