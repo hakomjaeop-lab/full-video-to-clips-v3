@@ -1,12 +1,7 @@
 services:
   - type: web
     name: full-video-to-clips-v3
-    runtime: python
-    buildCommand: |
-      pip install -r requirements.txt
-      # تثبيت FFmpeg و ffprobe في بيئة Render
-      apt-get update && apt-get install -y ffmpeg
-    startCommand: gunicorn app:app
+    runtime: docker
     envVars:
       - key: PORT
         value: 10000
